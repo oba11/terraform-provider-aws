@@ -39,3 +39,11 @@ The following arguments are supported:
 In addition to all arguments above, the following attributes are exported:
 
 * `arn` - The Amazon Resource Name of the job queue.
+
+## Import
+
+Batch Job Queue resource can be imported using the name or arn e.g.
+
+```
+$ terraform import aws_batch_job_queue.test_queue tf-test-batch-job-queue
+```

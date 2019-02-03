@@ -18,6 +18,9 @@ func resourceAwsBatchJobQueue() *schema.Resource {
 		Read:   resourceAwsBatchJobQueueRead,
 		Update: resourceAwsBatchJobQueueUpdate,
 		Delete: resourceAwsBatchJobQueueDelete,
+		Importer: &schema.ResourceImporter{
+			State: schema.ImportStatePassthrough,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"compute_environments": {
@@ -86,7 +89,7 @@ func resourceAwsBatchJobQueueCreate(d *schema.ResourceData, meta interface{}) er
 func resourceAwsBatchJobQueueRead(d *schema.ResourceData, meta interface{}) error {
 	conn := meta.(*AWSClient).batchconn
 
-	jq, err := getJobQueue(conn, d.Get("name").(string))
+	jq, err := getJobQueue(conn, d.Id())
 	if err != nil {
 		return err
 	}
